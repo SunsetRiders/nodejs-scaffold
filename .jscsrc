@@ -1,0 +1,18 @@
+{
+	"preset": "grunt",
+
+	"fileExtensions": [ ".js", ".jscs" ],
+
+	"maximumLineLength": 120,
+	"validateLineBreaks": "LF",
+	"validateIndentation": 2,
+
+	"safeContextKeyword": "_this",
+
+	"excludeFiles": [
+		"test/**/**",
+		".jshintrc",
+		".jscsrc",
+		"*.yaml"
+	]
+}
