@@ -1,7 +1,21 @@
 {
-  "name": "steep-wildflower",
-  "version": "1.0.0",
-  "description": "My app description",
+  "name": "nodejs-scaffold",
+  "version": "0.1.0",
+  "description": "A Node.js scaffolding for a web client with Express.js",
+  "contributors": [
+    "Gustavo Villalta <gvillalta@daitangroup.com> (http://github.com/gvillalta)",
+    "Habner Geotto <hgerotto@daitangroup.com> (http://github.com/habner)",
+    "Juliano Coimbra <jcoimbra@daitangroup.com> (http://github.com/jmcoimbra)",
+    "Marcelo Sughawara <msughawara@daitangroup.com> (http://github.com/msughawara)",
+    "Marcio Barbosa <mbarbosa@daitangroup.com> (http://github.com/marciodaitan)",
+    "Wellington Barbosa <wbarbosa@daitangroup.com> (http://github.com/wellington-barbosa-daitan)"
+  ],
+  "license": "UNLICENSED",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/SunsetRiders/nodejs-scaffold.git"
+  },
   "scripts": {
     "build": "gulp build",
     "build:production": "gulp build --production",
