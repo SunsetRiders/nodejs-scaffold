@@ -30,5 +30,8 @@ build/Release
 node_modules
 bower_components
 
-# Development files (Sass, Pug)
-app/dev
+# Compiled files
+app/scripts
+app/styles
+app/views
+index.html
