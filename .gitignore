@@ -30,6 +30,9 @@ build/Release
 node_modules
 bower_components
 
+# Sass cache files
+.sass-cache
+
 # Compiled files
 app/scripts
 app/styles
