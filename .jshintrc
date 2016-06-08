@@ -1,0 +1,24 @@
+{
+	// Enforcing
+	"boss": true,
+	"eqeqeq": true, // Require triple equals (===) for comparison
+	"forin": true, // Require filtering for..in loops with obj.hasOwnProperty()
+	"freeze": true, // prohibits overwriting prototypes of native objects such as Array, Date etc.
+	"newcap": true, // Require capitalization of all constructor functions e.g. `new F()`
+	"noarg": true, // Prohibit use of `arguments.caller` and `arguments.callee`
+	"noempty": true, // Prohibit use of empty blocks
+	"nonbsp": true, // Prohibit "non-breaking whitespace" characters.
+	"undef": true, // Require all non-global variables to be declared (prevents global leaks)
+	"unused": true, // Unused variables:
+
+	// Environments
+	"devel": true, // Development/debugging (alert, confirm, etc)
+	"mocha": true, // Mocha
+	"node": true, // Node.js
+	"browser": true, // Browsers
+	"latedef": "nofunc",
+
+	// Custom Globals
+	"globals": {}, // additional predefined global variables
+	"predef": []
+}
