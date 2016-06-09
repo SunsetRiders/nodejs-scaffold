@@ -9,7 +9,6 @@ var uglify = require('gulp-uglify');
 var sourcemaps = require('gulp-sourcemaps');
 var plumber = require('gulp-plumber');
 var jshint = require('gulp-jshint');
-var jscs = require('gulp-jscs');
 var eslint = require('gulp-eslint');
 
 gulp.task('sass', function() {
@@ -32,13 +31,6 @@ gulp.task('jshint', function() {
     .pipe(jshint.reporter('jshint-stylish'));
 });
 
-gulp.task('jscs', function() {
-  return gulp.src('./**/*.js')
-    .pipe(plumber())
-    .pipe(jscs())
-    .pipe(jscs.reporter());
-});
-
 gulp.task('eslint', function() {
   return gulp.src(['./**/*.js', '!node_modules/**'])
     .pipe(plumber())
@@ -47,7 +39,7 @@ gulp.task('eslint', function() {
     .pipe(eslint.failAfterError());
 });
 
-gulp.task('lint', ['jshint', 'jscs', 'eslint']);
+gulp.task('lint', ['jshint', 'eslint']);
 
 gulp.task('watch', function() {
   gulp.watch('public/css/**/*.sass', ['sass']);
