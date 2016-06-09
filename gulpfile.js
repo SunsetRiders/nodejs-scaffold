@@ -10,6 +10,7 @@ var sourcemaps = require('gulp-sourcemaps');
 var plumber = require('gulp-plumber');
 var jshint = require('gulp-jshint');
 var jscs = require('gulp-jscs');
+var eslint = require('gulp-eslint');
 
 gulp.task('sass', function() {
   return gulp.src('public/css/main.sass')
@@ -38,7 +39,15 @@ gulp.task('jscs', function() {
     .pipe(jscs.reporter());
 });
 
-gulp.task('lint', ['jshint', 'jscs']);
+gulp.task('eslint', function() {
+  return gulp.src(['./**/*.js', '!node_modules/**'])
+    .pipe(plumber())
+    .pipe(eslint())
+    .pipe(eslint.format())
+    .pipe(eslint.failAfterError());
+});
+
+gulp.task('lint', ['jshint', 'jscs', 'eslint']);
 
 gulp.task('watch', function() {
   gulp.watch('public/css/**/*.sass', ['sass']);
