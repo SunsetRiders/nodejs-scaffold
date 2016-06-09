@@ -1,0 +1,13 @@
+version: '2'
+services:
+  mongo:
+    image: mongo:3.3
+  web:
+    build: .
+    volumes:
+      - .:/app
+    command: npm start
+    ports:
+      - '3000:3000'
+    depends_on:
+      - mongo
