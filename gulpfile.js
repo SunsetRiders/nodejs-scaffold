@@ -14,9 +14,13 @@ var jscs = require('gulp-jscs');
 gulp.task('sass', function() {
   return gulp.src('public/css/main.sass')
     .pipe(plumber())
+    .pipe(sourcemaps.init())
     .pipe(sass())
+    .pipe(sourcemaps.write({includeContent: false}))
+    .pipe(sourcemaps.init({loadMaps: true}))
     .pipe(autoprefixer())
     .pipe(gulpif(argv.production, csso()))
+    .pipe(sourcemaps.write())
     .pipe(gulp.dest('public/css'));
 });
 
@@ -24,7 +28,7 @@ gulp.task('jshint', function() {
   return gulp.src('./**/*.js')
     .pipe(plumber())
     .pipe(jshint())
-    .pipe(jshint.reporter('default'));
+    .pipe(jshint.reporter('jshint-stylish'));
 });
 
 gulp.task('jscs', function() {
