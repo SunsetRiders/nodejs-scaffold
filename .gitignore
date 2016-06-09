@@ -33,6 +33,9 @@ bower_components
 # Sass cache files
 .sass-cache
 
+# MongoDB environment configuration
+.env
+
 # Compiled files
 *.css
 *.css.map
