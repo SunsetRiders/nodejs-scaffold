@@ -34,8 +34,5 @@ bower_components
 .sass-cache
 
 # Compiled files
-app/scripts
-app/styles
-app/views
-index.html
-public/css/main.css
+*.css
+*.css.map
