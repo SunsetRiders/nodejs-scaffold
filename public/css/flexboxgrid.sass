@@ -6,7 +6,7 @@
 $grid-columns: 12 !default
 $gutter-width: 1rem !default
 $outer-margin: 2rem !default
-$breakpoints: xs 1px 1px, sm 48em 46rem, md 64em 61rem, lg 75em 71rem !default
+$breakpoints: xs 1px 100%, sm 48em 46rem, md 64em 61rem, lg 75em 71rem !default
 $flexboxgrid-max-width: 1200px !default
 // Stop Editing
 
@@ -17,7 +17,7 @@ $gutter-compensation: $half-gutter-width * -1
   max-width: $flexboxgrid-max-width
   margin: 0 auto
 
-.container-fluid
+.container
   margin-right: auto
   margin-left: auto
   padding-right: $outer-margin
@@ -46,6 +46,7 @@ $gutter-compensation: $half-gutter-width * -1
   $name: nth($breakpoint, 1)
   .col-#{$name}
     @extend %flexboxgrid-sass-col-common
+    max-width: 100%
 
   @for $i from 1 through $grid-columns
     .col-#{$name}-#{$i}
