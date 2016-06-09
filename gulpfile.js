@@ -9,6 +9,7 @@ var uglify = require('gulp-uglify');
 var sourcemaps = require('gulp-sourcemaps');
 var plumber = require('gulp-plumber');
 var jshint = require('gulp-jshint');
+var jscs = require('gulp-jscs');
 
 gulp.task('sass', function() {
   return gulp.src('public/css/main.sass')
@@ -19,11 +20,21 @@ gulp.task('sass', function() {
     .pipe(gulp.dest('public/css'));
 });
 
-gulp.task('lint', function() {
+gulp.task('jshint', function() {
   return gulp.src('./**/*.js')
+    .pipe(plumber())
     .pipe(jshint())
     .pipe(jshint.reporter('default'));
 });
+
+gulp.task('jscs', function() {
+  return gulp.src('./**/*.js')
+    .pipe(plumber())
+    .pipe(jscs())
+    .pipe(jscs.reporter());
+});
+
+gulp.task('lint', ['jshint', 'jscs']);
 
 gulp.task('watch', function() {
   gulp.watch('public/css/**/*.sass', ['sass']);
