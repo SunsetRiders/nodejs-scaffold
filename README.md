@@ -18,6 +18,13 @@ Then run what a usual Node.js application needs:
 
 ```shell
 npm install
+npm run build
+```
+
+You can run the tests with:
+
+```shell
+npm test
 ```
 
 Finally, run our application:
@@ -36,7 +43,7 @@ What modules are we using, mainly?
 - [Gulp](http://gulpjs.com/), and;
 - [Sass](http://sass-lang.com/) related modules.
 
-This code is following development rules and styles with [jshint](http://jshint.com/) and [jscs](http://jscs.info/).
+This code is following development rules and styles with [jshint](http://jshint.com/) and [ESLint](http://eslint.org).
 Check commented code to enable integration with Mongo DB via [mongoose](http://mongoosejs.com/).
 
 ## Docker
@@ -51,7 +58,7 @@ docker-compose up
 
 It will setup docker and run the application on http://localhost:3000.
 
-We can run tests with:
+You can run tests with:
 
 ```shell
 docker-compose run web npm test
