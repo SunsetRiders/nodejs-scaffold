@@ -1,14 +1,18 @@
 var express = require('express');
-var path = require('path');
-var logger = require('morgan');
-var compression = require('compression');
-var methodOverride = require('method-override');
+//express middlewares
 var session = require('express-session');
 var flash = require('express-flash');
 var bodyParser = require('body-parser');
 var expressValidator = require('express-validator');
+
+var path = require('path');
+var logger = require('morgan');
+var compression = require('compression');
+var methodOverride = require('method-override');
+// reads a .env file in the root directory of a project
 var dotenv = require('dotenv');
-var mongoose = require('mongoose');
+// Mongo DB driver - remove the comment below if you are going to use it
+//var mongoose = require('mongoose');
 
 // Load environment variables from .env file
 dotenv.load();
@@ -19,12 +23,13 @@ var ContactController = require('./controllers/contact');
 
 var app = express();
 
-
+/* remove this comment if you are going to use mongoose
 mongoose.connect(process.env.MONGODB);
 mongoose.connection.on('error', function() {
   console.log('MongoDB Connection Error. Please make sure that MongoDB is running.');
   process.exit(1);
 });
+*/
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 app.set('port', process.env.PORT || 3000);
@@ -44,7 +49,7 @@ app.post('/contact', ContactController.contactPost);
 
 // Production error handler
 if (app.get('env') === 'production') {
-  app.use(function(err, req, res, next) {
+  app.use(function(err, req, res/*, next*/) {
     console.error(err.stack);
     res.sendStatus(err.status || 500);
   });
