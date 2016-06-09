@@ -1,0 +1,112 @@
+//
+// Flexbox Grid
+//
+
+// Settings
+$grid-columns: 12 !default
+$gutter-width: 1rem !default
+$outer-margin: 2rem !default
+$breakpoints: xs 1px 1px, sm 48em 46rem, md 64em 61rem, lg 75em 71rem !default
+$flexboxgrid-max-width: 1200px !default
+// Stop Editing
+
+$half-gutter-width: $gutter-width * .5
+$gutter-compensation: $half-gutter-width * -1
+
+.wrapper
+  max-width: $flexboxgrid-max-width
+  margin: 0 auto
+
+.container-fluid
+  margin-right: auto
+  margin-left: auto
+  padding-right: $outer-margin
+  padding-left: $outer-margin
+
+.row
+  display: flex
+  flex: 0 1 auto
+  flex-direction: row
+  flex-wrap: wrap
+  margin-right: $gutter-compensation
+  margin-left: $gutter-compensation
+
+.row.reverse
+  flex-direction: row-reverse
+
+.col.reverse
+  flex-direction: column-reverse
+
+%flexboxgrid-sass-col-common
+  flex: 0 0 auto
+  padding-right: $half-gutter-width
+  padding-left: $half-gutter-width
+
+@each $breakpoint in $breakpoints
+  $name: nth($breakpoint, 1)
+  .col-#{$name}
+    @extend %flexboxgrid-sass-col-common
+
+  @for $i from 1 through $grid-columns
+    .col-#{$name}-#{$i}
+      @extend %flexboxgrid-sass-col-common
+
+  @for $i from 1 through ($grid-columns - 1)
+    .col-#{$name}-offset-#{$i}
+      @extend %flexboxgrid-sass-col-common
+
+@each $breakpoint in $breakpoints
+  $name: nth($breakpoint, 1)
+  $size: nth($breakpoint, 2)
+  $container: nth($breakpoint, 3)
+  @media only screen and (min-width: $size)
+
+    .container
+      width: $container
+
+    .col-#{$name}
+      flex-grow: 1
+      flex-basis: 0
+      max-width: 100%
+
+    @for $i from 1 through $grid-columns
+      .col-#{$name}-#{$i}
+        flex-basis: 100% / $grid-columns * $i
+        max-width: 100% / $grid-columns * $i
+
+    @for $i from 1 through ($grid-columns - 1)
+      .col-#{$name}-offset-#{$i}
+        margin-left: 100% / $grid-columns * $i
+
+    .start-#{$name}
+      justify-content: flex-start
+      text-align: start
+
+    .center-#{$name}
+      justify-content: center
+      text-align: center
+
+    .end-#{$name}
+      justify-content: flex-end
+      text-align: end
+
+    .top-#{$name}
+      align-items: flex-start
+
+    .middle-#{$name}
+      align-items: center
+
+    .bottom-#{$name}
+      align-items: flex-end
+
+    .around-#{$name}
+      justify-content: space-around
+
+    .between-#{$name}
+      justify-content: space-between
+
+    .first-#{$name}
+      order: -1
+
+    .last-#{$name}
+      order: 1
