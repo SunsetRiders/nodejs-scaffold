@@ -46,7 +46,7 @@ What modules are we using, mainly?
 This code is following development rules and styles with [jshint](http://jshint.com/) and [ESLint](http://eslint.org).
 Check commented code to enable integration with Mongo DB via [mongoose](http://mongoosejs.com/).
 
-## Docker
+## Using Docker
 
 If you want to run this project with Docker:
 
