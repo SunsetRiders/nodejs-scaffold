@@ -19,7 +19,6 @@
   "scripts": {
     "build": "gulp build",
     "build:production": "gulp build --production",
-    "postinstall": "npm run build:production",
     "start": "node server.js",
     "test": "mocha",
     "watch": "gulp"
@@ -55,6 +54,7 @@
     "gulp": "^3.9.1",
     "gulp-eslint": "^2.0.0",
     "gulp-jshint": "^2.0.1",
+    "gulp-mocha": "^2.2.0",
     "jshint": "^2.9.2",
     "jshint-stylish": "^2.2.0",
     "mocha": "^2.4.5",
