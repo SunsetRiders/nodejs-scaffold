@@ -1,7 +1,7 @@
-/* exported should */
+/* global it, describe, before */
 var request = require('supertest');
 var server = require('../server');
-var should = require('chai').should(); 
+// var should = require('chai').should();
 var expect = require('chai').expect;
 var Browser = require('zombie');
 
@@ -12,7 +12,7 @@ describe('User visits the main page', function() {
     request(server)
     .get('/')
     .expect(200)
-    .end(function (err, res) {
+    .end(function(err, res) {
       if (err) {
         return done(err);
       }
@@ -27,7 +27,7 @@ describe('User visits the contact page', function() {
     request(server)
       .get('/contact')
     .expect(200)
-    .end(function (err, res) {
+    .end(function(err, res) {
       if (err) {
         return done(err);
       }
@@ -48,8 +48,8 @@ describe('User visits contact page', function() {
   describe('and submits form with valid values', function() {
     before(function(done) {
       browser
-        .fill('name',    'test')
-        .fill('email',   'test@test.com')
+        .fill('name', 'test')
+        .fill('email', 'test@test.com')
         .fill('message', 'test')
         .pressButton('Send', done);
     });
@@ -59,7 +59,8 @@ describe('User visits contact page', function() {
     });
 
     it('should see success message', function() {
-      expect(browser.html('body')).to.contain('Your feedback has been submitted');
+      expect(browser.html('body'))
+        .to.contain('Your feedback has been submitted');
     });
   });
 });
@@ -98,8 +99,8 @@ describe('User visits contact page', function() {
   describe('and submits form with invalid values', function() {
     before(function(done) {
       browser
-        .fill('name',    'test')
-        .fill('email',   'testtest.com')
+        .fill('name', 'test')
+        .fill('email', 'testtest.com')
         .fill('message', 'test')
         .pressButton('Send', done);
     });
@@ -109,7 +110,8 @@ describe('User visits contact page', function() {
     });
 
     it('should not see success message', function() {
-      expect(browser.html('body')).not.to.contain('Your feedback has been submitted');
+      expect(browser.html('body'))
+        .not.to.contain('Your feedback has been submitted');
     });
   });
 });
@@ -125,7 +127,7 @@ describe('User visitis an invalid page', function() {
 describe('User visits the main page and clicks the Contact link', function() {
   const browser = new Browser();
   it('should render ok', function(done) {
-    browser.visit( "http://localhost:3000",
+    browser.visit("http://localhost:3000",
       function() {
         browser.clickLink("Contact", function() {
           browser.assert.text('title', 'Contact');
