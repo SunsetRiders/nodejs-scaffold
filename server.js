@@ -1,5 +1,5 @@
 var express = require('express');
-//express middlewares
+// express middlewares
 var session = require('express-session');
 var flash = require('express-flash');
 var bodyParser = require('body-parser');
@@ -12,7 +12,7 @@ var methodOverride = require('method-override');
 // reads a .env file in the root directory of a project
 var dotenv = require('dotenv');
 // Mongo DB driver - remove the comment below if you are going to use it
-//var mongoose = require('mongoose');
+// var mongoose = require('mongoose');
 
 // Load environment variables from .env file
 dotenv.load();
@@ -36,10 +36,16 @@ app.set('port', process.env.PORT || 3000);
 app.use(compression());
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({extended: false}));
 app.use(expressValidator());
 app.use(methodOverride('_method'));
-app.use(session({ secret: process.env.SESSION_SECRET, resave: true, saveUninitialized: true }));
+app.use(
+    session({
+      secret: process.env.SESSION_SECRET,
+      resave: true,
+      saveUninitialized: true
+    })
+);
 app.use(flash());
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -49,7 +55,7 @@ app.post('/contact', ContactController.contactPost);
 
 // Production error handler
 if (app.get('env') === 'production') {
-  app.use(function(err, req, res/*, next*/) {
+  app.use(function(err, req, res /* , next*/) {
     console.error(err.stack);
     res.sendStatus(err.status || 500);
   });
