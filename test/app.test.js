@@ -1,4 +1,3 @@
-/* jshint esversion: 6 */
 /* exported should */
 var request = require('supertest');
 var server = require('../server');

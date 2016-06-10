@@ -10,6 +10,7 @@
 	"nonbsp": true, // Prohibit "non-breaking whitespace" characters.
 	"undef": true, // Require all non-global variables to be declared (prevents global leaks)
 	"unused": true, // Unused variables:
+	"esversion": 6, // To tell JSHint that your code uses ECMAScript 6 specific syntax 
 
 	// Environments
 	"devel": true, // Development/debugging (alert, confirm, etc)
