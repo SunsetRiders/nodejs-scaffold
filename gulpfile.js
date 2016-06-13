@@ -8,6 +8,7 @@ var sourcemaps = require('gulp-sourcemaps');
 var plumber = require('gulp-plumber');
 var jshint = require('gulp-jshint');
 var eslint = require('gulp-eslint');
+var mocha = require('gulp-spawn-mocha');
 
 gulp.task('sass', function() {
   return gulp.src('public/css/main.sass')
@@ -37,11 +38,18 @@ gulp.task('eslint', function() {
     .pipe(eslint.failAfterError());
 });
 
+gulp.task('test', function() {
+  return gulp.src(['./**/*.js', '!node_modules/**'])
+    .pipe(plumber())
+    .pipe(mocha({
+      env: {NODE_ENV: 'test'}}));
+});
+
 gulp.task('lint', ['jshint', 'eslint']);
 
 gulp.task('watch', function() {
   gulp.watch('public/css/**/*.sass', ['sass']);
-  gulp.watch('./**/*.js', ['lint']);
+  gulp.watch('./**/*.js', ['lint', 'test']);
 });
 
 gulp.task('build', ['sass', 'lint']);
