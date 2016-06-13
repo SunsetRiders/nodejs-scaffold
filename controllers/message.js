@@ -23,7 +23,7 @@ exports.messagePost = function(req, res) {
 
   var options = {
     host: 'hooks.slack.com',
-    path: '/services/T19S6M2UV/B1GEQPE2J/5IKa3uzymdVfGZuqFu8vCHET',
+    path: '/services/' + process.env.SLACK,
     method: 'POST',
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded',
@@ -36,6 +36,16 @@ exports.messagePost = function(req, res) {
     response.on('data', function (chunk) {
       console.log("body: " + chunk);
     });
+  });
+
+  request.on('error', function (e) {
+    // General error, i.e.
+    //  - ECONNRESET - server closed the socket unexpectedly
+    //  - ECONNREFUSED - server did not listen
+    //  - HPE_INVALID_VERSION
+    //  - HPE_INVALID_STATUS
+    //  - ... (other HPE_* codes) - server returned garbage
+    console.log(e);
   });
 
   request.write(data);
