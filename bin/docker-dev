@@ -6,6 +6,8 @@
 BIN_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 PROJECT_DIR="$( dirname "$BIN_DIR" )"
 
+UP_OR_DOWN=$1
+
 ##########
 # environment validations
 ##########
@@ -41,5 +43,16 @@ fi
 if [[ $DOCKER_COMPOSE_INSTALLED && $DOCKER_FILE_EXISTS && \
   $DOCKER_COMPOSE_FILE_EXISTS ]]
 then
-  cd $PROJECT_DIR && docker-compose build && docker-compose up
+  if [[ $UP_OR_DOWN == "up" ]]
+  then
+    cd $PROJECT_DIR && docker-compose build && docker-compose $UP_OR_DOWN
+  elif [[ $UP_OR_DOWN == "down" ]]
+  then
+    cd $PROJECT_DIR && docker-compose $UP_OR_DOWN
+  else
+    echo "Only accepted parameters are:"
+    echo "  'up'   - if you want to run the application;"
+    echo "  'down' - if you want to shutdown the application;"
+  fi
 fi
+
