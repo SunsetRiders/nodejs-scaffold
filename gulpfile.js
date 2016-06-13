@@ -8,6 +8,7 @@ var sourcemaps = require('gulp-sourcemaps');
 var plumber = require('gulp-plumber');
 var jshint = require('gulp-jshint');
 var eslint = require('gulp-eslint');
+var mocha = require('gulp-mocha');
 
 gulp.task('sass', function() {
   return gulp.src('public/css/main.sass')
@@ -39,9 +40,15 @@ gulp.task('eslint', function() {
 
 gulp.task('lint', ['jshint', 'eslint']);
 
+gulp.task('test', function() {
+  return gulp.src('./**/*.js', {read: false})
+    .pipe(plumber())
+    .pipe(mocha());
+});
+
 gulp.task('watch', function() {
   gulp.watch('public/css/**/*.sass', ['sass']);
-  gulp.watch('./**/*.js', ['lint']);
+  gulp.watch('./**/*.js', ['lint', 'test']);
 });
 
 gulp.task('build', ['sass', 'lint']);
