@@ -18,7 +18,7 @@ gulp.task('sass', function() {
     .pipe(sourcemaps.init({loadMaps: true}))
     .pipe(autoprefixer())
     .pipe(gulpif(argv.production, csso()))
-    .pipe(sourcemaps.write())
+    .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest('public/css'));
 });
 
