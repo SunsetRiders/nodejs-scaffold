@@ -1,7 +1,6 @@
 /* global it, describe, before */
 var request = require('supertest');
 var server = require('../server');
-// var should = require('chai').should();
 var expect = require('chai').expect;
 var Browser = require('zombie');
 
@@ -16,7 +15,7 @@ describe('User visits the main page', function() {
       if (err) {
         return done(err);
       }
-      res.text.should.have.match(/Donec id elit non/);
+      expect(res.text).to.have.match(/Donec id elit non/);
       done();
     });
   });
@@ -31,7 +30,7 @@ describe('User visits the contact page', function() {
       if (err) {
         return done(err);
       }
-      res.text.should.have.match(/Contact Form/);
+      expect(res.text).to.have.match(/Contact Form/);
       done();
     });
   });
