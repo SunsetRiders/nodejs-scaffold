@@ -1,36 +1,38 @@
-var gulp = require('gulp');
-var gulpif = require('gulp-if');
-var argv = require('yargs').argv;
-var autoprefixer = require('gulp-autoprefixer');
-var sass = require('gulp-sass');
-var csso = require('gulp-csso');
-var sourcemaps = require('gulp-sourcemaps');
-var plumber = require('gulp-plumber');
-var jshint = require('gulp-jshint');
-var eslint = require('gulp-eslint');
-var mocha = require('gulp-spawn-mocha');
+'use strict';
 
-gulp.task('sass', function() {
+import gulp from 'gulp';
+import gulpif from 'gulp-if';
+import plumber from 'gulp-plumber';
+import yargs from 'yargs';
+var argv = yargs.argv;
+/* Stylesheets */
+import sass from 'gulp-sass';
+import csso from 'gulp-csso';
+import autoprefixer from 'gulp-autoprefixer';
+import sourcemaps from 'gulp-sourcemaps';
+/* Javascript Lint */
+import jshint from 'gulp-jshint';
+import eslint from 'gulp-eslint';
+/* Tests */
+import mocha from 'gulp-spawn-mocha';
+
+gulp.task('sass', () => {
   return gulp.src('public/css/main.sass')
     .pipe(plumber())
-    .pipe(sourcemaps.init())
     .pipe(sass())
-    .pipe(sourcemaps.write({includeContent: false}))
-    .pipe(sourcemaps.init({loadMaps: true}))
     .pipe(autoprefixer())
     .pipe(gulpif(argv.production, csso()))
-    .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest('public/css'));
 });
 
-gulp.task('jshint', function() {
+gulp.task('jshint', () => {
   return gulp.src('./**/*.js')
     .pipe(plumber())
     .pipe(jshint())
     .pipe(jshint.reporter('jshint-stylish'));
 });
 
-gulp.task('eslint', function() {
+gulp.task('eslint', () => {
   return gulp.src(['./**/*.js', '!node_modules/**'])
     .pipe(plumber())
     .pipe(eslint())
@@ -38,16 +40,17 @@ gulp.task('eslint', function() {
     .pipe(eslint.failAfterError());
 });
 
-gulp.task('test', function() {
+gulp.task('test', () => {
   return gulp.src(['./**/*.js', '!node_modules/**'])
     .pipe(plumber())
     .pipe(mocha({
-      env: {NODE_ENV: 'test'}}));
+      env: {NODE_ENV: 'test'}
+    }));
 });
 
 gulp.task('lint', ['jshint', 'eslint']);
 
-gulp.task('watch', function() {
+gulp.task('watch', () => {
   gulp.watch('public/css/**/*.sass', ['sass']);
   gulp.watch('./**/*.js', ['lint', 'test']);
 });
