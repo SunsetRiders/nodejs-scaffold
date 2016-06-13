@@ -45,7 +45,9 @@ if [[ $DOCKER_COMPOSE_INSTALLED && $DOCKER_FILE_EXISTS && \
 then
   if [[ $UP_OR_DOWN == "up" ]]
   then
-    cd $PROJECT_DIR && docker-compose build && docker-compose $UP_OR_DOWN
+    cd $PROJECT_DIR && docker-compose build \
+      && docker-compose $UP_OR_DOWN -d \
+      && docker-compose run node gulp watch
   elif [[ $UP_OR_DOWN == "down" ]]
   then
     cd $PROJECT_DIR && docker-compose $UP_OR_DOWN
