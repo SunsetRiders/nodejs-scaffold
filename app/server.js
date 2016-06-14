@@ -47,7 +47,7 @@ app.use(
     })
 );
 app.use(flash());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, '..', 'public')));
 
 app.get('/', HomeController.index);
 app.get('/contact', ContactController.contactGet);
