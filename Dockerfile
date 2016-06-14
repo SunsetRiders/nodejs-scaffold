@@ -4,6 +4,7 @@ RUN mkdir /app
 ADD . /app
 WORKDIR /app
 RUN npm install
+RUN npm install gulp -g
 RUN gulp build-prod
 ENV PATH /app/node_modules/.bin:$PATH
 
