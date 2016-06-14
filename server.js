@@ -20,6 +20,7 @@ dotenv.load();
 // Controllers
 var HomeController = require('./controllers/home');
 var ContactController = require('./controllers/contact');
+var MessageController = require('./controllers/message');
 
 var app = express();
 
@@ -52,6 +53,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.get('/', HomeController.index);
 app.get('/contact', ContactController.contactGet);
 app.post('/contact', ContactController.contactPost);
+
+app.get('/message', MessageController.messageGet);
+app.post('/message', MessageController.messagePost);
 
 // Production error handler
 if (app.get('env') === 'production') {
