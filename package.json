@@ -18,6 +18,7 @@
   },
   "scripts": {
     "build": "gulp build",
+    "preinstall": "npm install && npm install gulp -g && gulp build-prod",
     "build:production": "gulp build --production",
     "postinstall": "npm run build:production",
     "start": "node server.js",
