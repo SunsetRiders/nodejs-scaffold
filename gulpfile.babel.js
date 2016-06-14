@@ -8,7 +8,8 @@ var argv = yargs.argv;
 /* Stylesheets */
 import sass from 'gulp-sass';
 import csso from 'gulp-csso';
-import autoprefixer from 'gulp-autoprefixer';
+import postcss from 'gulp-postcss';
+import autoprefixer from 'autoprefixer';
 import sourcemaps from 'gulp-sourcemaps';
 /* Javascript Lint */
 import jshint from 'gulp-jshint';
@@ -19,14 +20,18 @@ import mocha from 'gulp-spawn-mocha';
 gulp.task('sass', () => {
   return gulp.src('public/css/main.sass')
     .pipe(plumber())
+    .pipe(sourcemaps.init())
     .pipe(sass())
-    .pipe(autoprefixer())
+    .pipe(sourcemaps.write({includeContent: false}))
+    .pipe(sourcemaps.init({loadMaps: true}))
+    .pipe(postcss([autoprefixer({browsers: 'last 2 versions'})]))
     .pipe(gulpif(argv.production, csso()))
+    .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest('public/css'));
 });
 
 gulp.task('jshint', () => {
-  return gulp.src('./**/*.js')
+  return gulp.src(['./**/*.js', '!node_modules/**'])
     .pipe(plumber())
     .pipe(jshint())
     .pipe(jshint.reporter('jshint-stylish'));
