@@ -57,3 +57,4 @@ gulp.task('watch', () => {
 
 gulp.task('build', ['sass', 'lint']);
 gulp.task('default', ['build', 'watch']);
+gulp.task('build-prod', ['sass']);
